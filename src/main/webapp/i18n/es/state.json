@@ -1,0 +1,10 @@
+{
+  "testsApp": {
+    "State": {
+      "null": "",
+      "IN_CHARGE": "IN_CHARGE",
+      "SHIPPED": "SHIPPED",
+      "DELIVERED": "DELIVERED"
+    }
+  }
+}

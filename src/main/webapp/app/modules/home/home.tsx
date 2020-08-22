@@ -61,7 +61,7 @@ class App extends React.Component  {
             <Line type="monotone" dataKey="cantidadVentas" stroke="#8884d8" activeDot={{ r: 8 }} />
           </LineChart>
     );
-          }
+  }
 };
 
 export default App;

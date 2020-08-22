@@ -18,10 +18,11 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.TreeMap;
 import java.util.Map;
 import java.util.Optional;
 import java.time.*;
-import java.util.TreeMap;
+
 
 
 /**
@@ -143,11 +144,11 @@ public class SalesResource {
                     VentaFecha aux = VentaFechaMap.get(venta.getDate());
                     aux.sumarVenta();
                     VentaFechaMap.put(venta.getDate(),aux);
-                }
+                } 
                 else {
                     VentaFechaMap.put(venta.getDate(), new VentaFecha(venta.getDate()));
                 }
-            }
+            } 
         } 
         List<VentaFecha> ventasDeliveredPorDia = new ArrayList<>(VentaFechaMap.values());
 

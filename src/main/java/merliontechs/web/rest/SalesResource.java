@@ -1,6 +1,7 @@
 package merliontechs.web.rest;
 
 import merliontechs.domain.Sales;
+import merliontechs.domain.enumeration.State;
 import merliontechs.repository.SalesRepository;
 import merliontechs.web.rest.errors.BadRequestAlertException;
 
@@ -15,8 +16,13 @@ import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
+import java.time.*;
+import java.util.*;
 
 /**
  * REST controller for managing {@link merliontechs.domain.Sales}.
@@ -115,4 +121,38 @@ public class SalesResource {
         salesRepository.deleteById(id);
         return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString())).build();
     }
+
+    ///--- Realizo las funciones Java para cada item Pedido y ser mostrados en la API---///
+
+    /**
+     * {@code GET  /sales/VentasDeliveredPorDia} : get all the delivered sales per day.
+     */
+    @GetMapping("/sales/VentasDeliveredPorDia")
+    public List<VentaFecha> VentasDeliveredPorDia(){
+        log.debug("REST request to obtener las ventas con estado Delivered por dia");
+        //* Uso la fecha como clave del map para verificar mas facil si hubo una venta el mismo dia
+        Map<LocalDate, VentaFecha> VentaFechaMap = new TreeMap<LocalDate, VentaFecha>();
+        List<Sales> ventas = getAllSales(); 
+
+
+        //int cant =1;
+        for (Sales venta: ventas){
+           if (venta.getState() == State.DELIVERED){ 
+               
+                if (VentaFechaMap.containsKey(venta.getDate())){
+                    VentaFecha aux = VentaFechaMap.get(venta.getDate());
+                    aux.sumarVenta();
+                    VentaFechaMap.put(venta.getDate(),aux);
+                }
+                else {
+                    VentaFechaMap.put(venta.getDate(), new VentaFecha(venta.getDate()));
+                }
+            }
+        } 
+        List<VentaFecha> ventasDeliveredPorDia = new ArrayList<>(VentaFechaMap.values());
+
+        return ventasDeliveredPorDia;
+        
+    }
+
 }

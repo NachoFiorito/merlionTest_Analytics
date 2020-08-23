@@ -52,7 +52,7 @@ class R5ProdMasVendidos extends React.Component {
 
 
     const aux = sortJSON('cantVentas', await res.json(), 'desc');
-    const datos = aux.slice(1,6);
+    const datos = aux.slice(0,5);
 
     this.setState({
       datos,

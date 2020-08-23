@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.TreeMap;
 import java.util.Map;
@@ -199,7 +200,9 @@ public class SalesResource {
         }
         
         List<ProdMasVend> ProductosMasVendidos = new ArrayList<>(prodVend.values());
+
         return ProductosMasVendidos;
     }
 
+    
 }

@@ -182,4 +182,24 @@ public class SalesResource {
         
     }
 
+    @GetMapping("/sales/5ProductosMasVendidos")
+    public List<ProdMasVend>  ProductosMasVendidos(){
+        log.debug("REST request to obtener top 5 productos mas vendidos");
+        Map<Long,ProdMasVend> prodVend = new TreeMap<Long,ProdMasVend>();
+        List<Sales> ventas = getAllSales();
+
+        for(Sales venta: ventas){
+            if(!prodVend.containsKey(venta.getProduct().getId())){
+                prodVend.put(venta.getProduct().getId(), new ProdMasVend(venta.getProduct().getId()));
+            }else{
+                ProdMasVend aux = prodVend.get(venta.getProduct().getId());
+                aux.sumarVenta();
+                prodVend.put(venta.getProduct().getId(), aux);
+            }
+        }
+        
+        List<ProdMasVend> ProductosMasVendidos = new ArrayList<>(prodVend.values());
+        return ProductosMasVendidos;
+    }
+
 }

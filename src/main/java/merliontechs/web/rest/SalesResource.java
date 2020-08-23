@@ -156,4 +156,30 @@ public class SalesResource {
         
     }
 
+    @GetMapping("/sales/VentasPorDia")
+    public List<VentaFecha> VentasPorDia(){
+        log.debug("REST request to obtener las ventas por dia");
+        //* Idem funcion anterior por sin condicion por state
+        Map<LocalDate, VentaFecha> VentaFechaMap = new TreeMap<LocalDate, VentaFecha>();
+        List<Sales> ventas = getAllSales(); 
+
+
+        for (Sales venta: ventas){
+               
+                if (VentaFechaMap.containsKey(venta.getDate())){
+                    VentaFecha aux = VentaFechaMap.get(venta.getDate());
+                    aux.sumarVenta();
+                    VentaFechaMap.put(venta.getDate(),aux);
+                } 
+                else {
+                    VentaFechaMap.put(venta.getDate(), new VentaFecha(venta.getDate()));
+                }
+            
+        } 
+        List<VentaFecha> ventasDeliveredPorDia = new ArrayList<>(VentaFechaMap.values());
+
+        return ventasDeliveredPorDia;
+        
+    }
+
 }

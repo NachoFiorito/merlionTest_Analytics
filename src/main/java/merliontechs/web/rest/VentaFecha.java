@@ -24,7 +24,7 @@ public class VentaFecha {
         this.cantVentas ++;
     }
 
-    public int getCantidadVentas() {
+    public int getCantVentas() {
         return cantVentas;
     }
 

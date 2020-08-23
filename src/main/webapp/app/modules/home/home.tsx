@@ -7,6 +7,7 @@ import { connect } from 'react-redux';
 import { Row, Col, Alert } from 'reactstrap';
 import VentasDeliveredPorDia from './VentasDeliveredPorDia';
 import VentasPorDia from './VentasPorDia';
+import R5ProdMasVendidos from './R5ProdMasVendidos';
 
 export type IHomeProp = StateProps;
 
@@ -25,6 +26,10 @@ export const Home = (props: IHomeProp) => {
             <div className="PorDia">
               <h3>Ventas Por Dia</h3>
               <VentasPorDia />
+            </div>
+            <div className="5MasVendidos">
+              <h3>Ranking 5 Productos mas vendidos</h3>
+              <R5ProdMasVendidos/>
             </div>
           </div>
         ) : (

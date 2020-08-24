@@ -140,14 +140,14 @@ public class SalesResource {
         //int cant =1;
         for (Sales venta: ventas){
            if (venta.getState() == State.DELIVERED){ 
-               
-                if (VentaFechaMap.containsKey(venta.getDate())){
-                    VentaFecha aux = VentaFechaMap.get(venta.getDate());
+               LocalDate date = venta.getDate();
+                if (VentaFechaMap.containsKey(date)){
+                    VentaFecha aux = VentaFechaMap.get(date);
                     aux.sumarVenta();
-                    VentaFechaMap.put(venta.getDate(),aux);
+                    VentaFechaMap.put(date,aux);
                 } 
                 else {
-                    VentaFechaMap.put(venta.getDate(), new VentaFecha(venta.getDate()));
+                    VentaFechaMap.put(date, new VentaFecha(date));
                 }
             } 
         } 
@@ -166,14 +166,14 @@ public class SalesResource {
 
 
         for (Sales venta: ventas){
-               
-                if (VentaFechaMap.containsKey(venta.getDate())){
-                    VentaFecha aux = VentaFechaMap.get(venta.getDate());
+               LocalDate date = venta.getDate();
+                if (VentaFechaMap.containsKey(date)){
+                    VentaFecha aux = VentaFechaMap.get(date);
                     aux.sumarVenta();
-                    VentaFechaMap.put(venta.getDate(),aux);
+                    VentaFechaMap.put(date,aux);
                 } 
                 else {
-                    VentaFechaMap.put(venta.getDate(), new VentaFecha(venta.getDate()));
+                    VentaFechaMap.put(date, new VentaFecha(date));
                 }
             
         } 
@@ -190,12 +190,13 @@ public class SalesResource {
         List<Sales> ventas = getAllSales();
 
         for(Sales venta: ventas){
-            if(!prodVend.containsKey(venta.getProduct().getId())){
-                prodVend.put(venta.getProduct().getId(), new ProdMasVend(venta.getProduct().getId()));
+            Long idProd = venta.getProduct().getId();
+            if(!prodVend.containsKey(idProd)){
+                prodVend.put(idProd, new ProdMasVend(idProd));
             }else{
-                ProdMasVend aux = prodVend.get(venta.getProduct().getId());
+                ProdMasVend aux = prodVend.get(idProd);
                 aux.sumarVenta();
-                prodVend.put(venta.getProduct().getId(), aux);
+                prodVend.put(idProd, aux);
             }
         }
         

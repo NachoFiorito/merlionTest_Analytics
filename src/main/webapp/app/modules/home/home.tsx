@@ -9,6 +9,7 @@ import VentasDeliveredPorDia from './VentasDeliveredPorDia';
 import VentasPorDia from './VentasPorDia';
 import R5ProdMasVendidos from './R5ProdMasVendidos';
 import R5ProdMasIngresos from './R5ProdMasIngresos';
+import { Typography, Grid, Box } from '@material-ui/core';
 
 export type IHomeProp = StateProps;
 
@@ -19,22 +20,25 @@ export const Home = (props: IHomeProp) => {
     <Row>
       <Col md="8">
         {account && account.login ? (
-          <div>
+          <div className="Graficos">
             <div className="DeliveredPorDia">
-              <h3>Ventas Delivered Por Dia</h3>
+              <Typography variant="h5">Ventas Delivered Por Dia</Typography>
               <VentasDeliveredPorDia />
             </div>
+
             <div className="PorDia">
-              <h3>Ventas Por Dia</h3>
+              <Typography variant="h5">Ventas Por Dia</Typography>
               <VentasPorDia />
             </div>
-            <div className="5MasVendidos">
-              <h3>Ranking 5 Productos mas vendidos</h3>
-              <R5ProdMasVendidos/>
+
+            <div className="R5MasVendidos">
+              <Typography variant="h5">Ranking 5 Productos Mas Vendidos</Typography>
+              <R5ProdMasVendidos />
             </div>
-            <div className="5MasIngreso"> 
-              <h3>Ranking 5 Producto con mas ingresos</h3>
-              <R5ProdMasIngresos/>
+
+            <div className="R5MasIngreso">
+              <Typography variant="h5">Ranking 5 Producto Con Mas Ingresos</Typography>
+              <R5ProdMasIngresos />
             </div>
           </div>
         ) : (

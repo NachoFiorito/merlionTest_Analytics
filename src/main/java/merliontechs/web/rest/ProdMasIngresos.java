@@ -1,4 +1,4 @@
-package merliontechs.domain;
+package merliontechs.web.rest;
 
 import java.math.BigDecimal;
 

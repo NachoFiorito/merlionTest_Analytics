@@ -1,6 +1,5 @@
 package merliontechs.web.rest;
 
-import merliontechs.domain.ProdMasIngresos;
 import merliontechs.domain.Sales;
 import merliontechs.domain.enumeration.State;
 import merliontechs.repository.SalesRepository;
@@ -19,7 +18,6 @@ import java.math.BigDecimal;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.TreeMap;
 import java.util.Map;

@@ -1,5 +1,6 @@
 package merliontechs.web.rest;
 
+import merliontechs.domain.ProdMasIngresos;
 import merliontechs.domain.Sales;
 import merliontechs.domain.enumeration.State;
 import merliontechs.repository.SalesRepository;
@@ -14,6 +15,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
@@ -204,5 +206,26 @@ public class SalesResource {
         return ProductosMasVendidos;
     }
 
+    @GetMapping("/sales/5ProductosConMasIngresos")
+    public List<ProdMasIngresos> ProductosConMasIngresos(){
+        log.debug("REST request to obtener top 5 productos con mas ingresos");
+        Map<Long, ProdMasIngresos> ProdIngr = new TreeMap<Long, ProdMasIngresos>();
+        List<Sales> ventas = getAllSales();
+
+        for(Sales venta: ventas){
+            BigDecimal precioProd = venta.getProduct().getPrice();
+            Long idProd = venta.getProduct().getId();
+            if(!ProdIngr.containsKey(idProd)){
+                ProdIngr.put(idProd, new ProdMasIngresos(idProd, precioProd));
+            }else{
+                ProdMasIngresos auxProd = ProdIngr.get(idProd);
+                auxProd.sumarPrecio(precioProd);
+                ProdIngr.put(idProd,auxProd);
+            }
+        }
+        List<ProdMasIngresos> ProductosConMasIngresos = new ArrayList<>(ProdIngr.values());
+       
+        return ProductosConMasIngresos;
+    }
     
 }

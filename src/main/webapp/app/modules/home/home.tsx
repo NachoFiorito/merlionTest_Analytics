@@ -8,6 +8,7 @@ import { Row, Col, Alert } from 'reactstrap';
 import VentasDeliveredPorDia from './VentasDeliveredPorDia';
 import VentasPorDia from './VentasPorDia';
 import R5ProdMasVendidos from './R5ProdMasVendidos';
+import R5ProdMasIngresos from './R5ProdMasIngresos';
 
 export type IHomeProp = StateProps;
 
@@ -30,6 +31,10 @@ export const Home = (props: IHomeProp) => {
             <div className="5MasVendidos">
               <h3>Ranking 5 Productos mas vendidos</h3>
               <R5ProdMasVendidos/>
+            </div>
+            <div className="5MasIngreso"> 
+              <h3>Ranking 5 Producto con mas ingresos</h3>
+              <R5ProdMasIngresos/>
             </div>
           </div>
         ) : (

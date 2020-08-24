@@ -17,7 +17,9 @@ public class ProdMasIngresos {
     }
 
     public void sumarPrecio(BigDecimal precio){
-        this.precio.add(precio) ;
+        int a = precio.intValue();
+        int b = this.precio.intValue()+a;
+        this.precio=BigDecimal.valueOf(b);
     }
 
     public BigDecimal getPrecio(){
